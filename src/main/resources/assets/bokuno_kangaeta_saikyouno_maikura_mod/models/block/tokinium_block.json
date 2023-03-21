@@ -1,0 +1,6 @@
+{
+  "parent": "block/cube_all",
+  "textures": {
+    "all": "bokuno_kangaeta_saikyouno_maikura_mod:block/tokinium_block"
+  }
+}
