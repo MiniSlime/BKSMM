@@ -4,5 +4,6 @@
   "item.bokuno_kangaeta_saikyouno_maikura_mod.tokinium_sword": "TOKINIUM Sword",
   "item.bokuno_kangaeta_saikyouno_maikura_mod.tokinium_pickaxe": "TOKINIUM Pickaxe",
   "item.bokuno_kangaeta_saikyouno_maikura_mod.tokinium_shovel": "TOKINIUM Shovel",
-  "item.bokuno_kangaeta_saikyouno_maikura_mod.tokinium_axe": "TOKINIUM Axe"
+  "item.bokuno_kangaeta_saikyouno_maikura_mod.tokinium_axe": "TOKINIUM Axe",
+  "entity.bokuno_kangaeta_saikyouno_maikura_mod.tokinium_slime_entity": "TOKINIUM Slime"
 }

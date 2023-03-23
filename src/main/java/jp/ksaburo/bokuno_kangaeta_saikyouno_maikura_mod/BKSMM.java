@@ -1,10 +1,14 @@
 package jp.ksaburo.bokuno_kangaeta_saikyouno_maikura_mod;
 
 import com.mojang.logging.LogUtils;
+import jp.ksaburo.bokuno_kangaeta_saikyouno_maikura_mod.client.models.TokiniumSlimeEntityModel;
+import jp.ksaburo.bokuno_kangaeta_saikyouno_maikura_mod.client.renderer.TokiniumSlimeEntityRenderer;
 import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobCategory;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
@@ -14,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -41,6 +46,8 @@ public class BKSMM {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "bokuno_kangaeta_saikyouno_maikura_mod" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
+
+    public static final DeferredRegister<EntityType<?>> ENTITIES = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, MODID);
     public static final RegistryObject<Item> TOKINIUM = ITEMS.register("tokinium", () -> new Item(new Item.Properties()
             .rarity(Rarity.RARE)
     ));
@@ -71,6 +78,12 @@ public class BKSMM {
             () -> new AxeItem(Tiers.DIAMOND,20,-3.5f,new Item.Properties().rarity(Rarity.EPIC))
             );
 
+    public static final RegistryObject<EntityType<TokiniumSlimeEntity>> TOKINIUM_SLIME_ENTITY = ENTITIES.register("tokinium_slime_entity",
+            () -> EntityType.Builder.of(TokiniumSlimeEntity::new, MobCategory.MONSTER)
+                    .sized(1f,1f)
+                    .build("bokuno_kangaeta_saikyouno_maikura_mod:tokinium_slime_entity")
+            );
+
     public BKSMM() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -81,6 +94,7 @@ public class BKSMM {
         BLOCKS.register(modEventBus);
         // Register the Deferred Register to the mod event bus so items get registered
         ITEMS.register(modEventBus);
+        ENTITIES.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
