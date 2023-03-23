@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "bokuno_kangaeta_saikyouno_maikura_mod:item/tokinium_shovel"
+  }
+}

@@ -5,10 +5,8 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.tags.BlockTags;
 import net.minecraft.tags.TagKey;
-import net.minecraft.world.item.BlockItem;
-import net.minecraft.world.item.CreativeModeTabs;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
+import net.minecraft.world.food.FoodProperties;
+import net.minecraft.world.item.*;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.SoundType;
@@ -28,6 +26,7 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+import org.checkerframework.checker.units.qual.A;
 import org.slf4j.Logger;
 
 // The value here should match an entry in the META-INF/mods.toml file
@@ -42,24 +41,36 @@ public class BKSMM {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, MODID);
     // Create a Deferred Register to hold Items which will all be registered under the "bokuno_kangaeta_saikyouno_maikura_mod" namespace
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, MODID);
-
-    // Creates a new Block with the id "bokuno_kangaeta_saikyouno_maikura_mod:example_block", combining the namespace and path
-    public static final RegistryObject<Block> EXAMPLE_BLOCK = BLOCKS.register("example_block", () -> new Block(BlockBehaviour.Properties.of(Material.STONE)));
-    // Creates a new BlockItem with the id "bokuno_kangaeta_saikyouno_maikura_mod:example_block", combining the namespace and path
-    public static final RegistryObject<Item> EXAMPLE_BLOCK_ITEM = ITEMS.register("example_block", () -> new BlockItem(EXAMPLE_BLOCK.get(), new Item.Properties()));
-
     public static final RegistryObject<Item> TOKINIUM = ITEMS.register("tokinium", () -> new Item(new Item.Properties()
-            .rarity(Rarity.EPIC)
-            .stacksTo(10)
+            .rarity(Rarity.RARE)
     ));
 
     public static final RegistryObject<Block> TOKINIUM_BLOCK = BLOCKS.register("tokinium_block", () -> new Block(BlockBehaviour.Properties.of(Material.METAL)
-            .strength(1.5f, 10f)
+            .strength(0.25f, 12f)
             .requiresCorrectToolForDrops()
             .lightLevel(BlockState -> 5)
     ));
 
-    public static final RegistryObject<Item> TOKINIUM_BLOCK_ITEM = ITEMS.register("tokinium_block", () -> new BlockItem(TOKINIUM_BLOCK.get(), new Item.Properties()));
+    public static final RegistryObject<Item> TOKINIUM_BLOCK_ITEM = ITEMS.register("tokinium_block", () -> new BlockItem(TOKINIUM_BLOCK.get(), new Item.Properties()
+            .rarity(Rarity.EPIC)
+    ));
+
+    public static final RegistryObject<SwordItem> TOKINIUM_SWORD = ITEMS.register("tokinium_sword",
+            () -> new TokiniumSword(Tiers.DIAMOND,15,-3.0f,new Item.Properties().rarity(Rarity.EPIC))
+            );
+
+    public static final RegistryObject<PickaxeItem> TOKINIUM_PICKAXE = ITEMS.register("tokinium_pickaxe",
+            () -> new PickaxeItem(Tiers.DIAMOND, 5, -3.0f, new Item.Properties().rarity(Rarity.EPIC))
+            );
+
+    public static final RegistryObject<ShovelItem> TOKINIUM_SHOVEL = ITEMS.register("tokinium_shovel",
+            () -> new ShovelItem(Tiers.DIAMOND, 4, -3.0f, new Item.Properties().rarity(Rarity.EPIC))
+            );
+
+    public static final RegistryObject<AxeItem> TOKINIUM_AXE = ITEMS.register("tokinium_axe",
+            () -> new AxeItem(Tiers.DIAMOND,20,-3.5f,new Item.Properties().rarity(Rarity.EPIC))
+            );
+
     public BKSMM() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
@@ -87,11 +98,19 @@ public class BKSMM {
     private void addCreative(CreativeModeTabEvent.BuildContents event)
     {
         if (event.getTab() == CreativeModeTabs.BUILDING_BLOCKS){
-            event.accept(EXAMPLE_BLOCK_ITEM);
             event.accept(TOKINIUM_BLOCK_ITEM);
         }
         if(event.getTab() == CreativeModeTabs.INGREDIENTS){
             event.accept(TOKINIUM);
+        }
+        if(event.getTab() == CreativeModeTabs.COMBAT){
+            event.accept(TOKINIUM_SWORD);
+            event.accept(TOKINIUM_AXE);
+        }
+        if(event.getTab() == CreativeModeTabs.TOOLS_AND_UTILITIES){
+            event.accept(TOKINIUM_PICKAXE);
+            event.accept(TOKINIUM_SHOVEL);
+            event.accept(TOKINIUM_AXE);
         }
     }
 

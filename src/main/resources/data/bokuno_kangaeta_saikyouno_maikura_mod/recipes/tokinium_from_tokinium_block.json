@@ -1,0 +1,13 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "group": "tokinium",
+  "ingredients": [
+    {
+      "item": "bokuno_kangaeta_saikyouno_maikura_mod:tokinium_block"
+    }
+  ],
+  "result": {
+    "item": "bokuno_kangaeta_saikyouno_maikura_mod:tokinium",
+    "count": 9
+  }
+}

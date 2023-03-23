@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "###",
+    "###"
+  ],
+  "key": {
+    "#": {
+      "item": "bokuno_kangaeta_saikyouno_maikura_mod:tokinium"
+    }
+  },
+  "result": {
+    "item": "bokuno_kangaeta_saikyouno_maikura_mod:tokinium_block"
+  }
+}
